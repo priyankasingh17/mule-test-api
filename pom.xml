@@ -44,6 +44,7 @@
 						<region>us-east-2</region>
 						<workers>1</workers>
 						<objectStoreV2>true</objectStoreV2>
+						<businessGroupId>d93f3652-85a4-478d-97e1-dd1ff6c82322</businessGroupId>
 						<!-- Start: SECURED PROPERTIES CI/CD -->
 <!-- 						<properties>
 							<secure.key>${decryption.key}</secure.key>
