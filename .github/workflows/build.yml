@@ -2,9 +2,11 @@ name: Build and Deploy to CloudHub
 
 on:
   push:
-    branches: [ main ]
+    branches: 
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
     
 jobs:
   # test:
@@ -40,7 +42,7 @@ jobs:
     # needs: test
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout this repo
+    - name: Checkout Repository
       uses: actions/checkout@v3
     - name: Cache dependencies
       uses: actions/cache@v3
@@ -50,10 +52,11 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
     - name: Set up JDK 1.8
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4.2.1
       with:
         distribution: 'zulu'
         java-version: 8
+        cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml -DskipMunitTests
     - name: Stamp artifact file name with commit hash
@@ -71,6 +74,11 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    env:
+        ID: ${{ secrets.CONNECTED_APP_CLIENT_ID }}
+        SECRET: ${{ secrets.CONNECTED_APP_CLIENT_SECRET }}
+        # KEY: ${{ secrets.decryption_key }}
+        ENV_NAME: dev
     steps:    
     - name: Checkout this repo
       uses: actions/checkout@v3
@@ -85,18 +93,14 @@ jobs:
       with:
         name: artifacts
     - name: Deploy to CloudHub
-      env:
-        ID: ${{ secrets.CONNECTED_APP_CLIENT_ID }}
-        SECRET: ${{ secrets.CONNECTED_APP_CLIENT_SECRET }}
-        # KEY: ${{ secrets.decryption_key }}
       run: |
         artifactName=$(ls *.jar | head -1)
-        mvn deploy -DskipMunitTests -DmuleDeploy \
-         -Danypoint.muleVersion=4.5.4 \
+        mvn deploy -DskipMunitTests -DmuleDeploy -e \
          -Dmule.artifact=$artifactName \
          -Dclient.id="$ID" \
-         -Dclient.secret="$SECRET" 
-      # \
+         -Dclient.secret="$SECRET" \
+         -Denv="$ENV_NAME" \
+#  -Danypoint.muleVersion=4.5.4 \
          # -Ddecryption.key="$KEY"
       # -Danypoint.env=Sandbox \
       #    
