@@ -75,7 +75,7 @@ jobs:
           artifactName=$(ls *.jar | head -1)
           mvn deploy -DmuleDeploy -e \
           -Dmule.artifact=$artifactName \
-          -Danypoint.CA_CLIENT_ID="$CA_CLIENT_ID" \
-          -Danypoint.CA_CLIENT_SECRET="$CA_CLIENT_SECRET" \
+          -Dclient.id="$CA_CLIENT_ID" \
+          -Dclient.secret="$CA_CLIENT_SECRET" \
           -Denv="$ENV_NAME" \
         # -DskipDeploymentVerification="true"
