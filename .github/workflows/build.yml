@@ -98,9 +98,9 @@ jobs:
         mvn deploy -DskipMunitTests -DmuleDeploy -e \
          -Dmule.artifact=$artifactName \
          -Dclient.id="$ID" \
-         -Dclient.secret="$SECRET" \
-         -Denv="$ENV_NAME" \
+         -Dclient.secret="$SECRET" 
+      # -Denv="$ENV_NAME" \
 #  -Danypoint.muleVersion=4.5.4 \
-         # -Ddecryption.key="$KEY"
+ # -Ddecryption.key="$KEY"
       # -Danypoint.env=Sandbox \
       #    
