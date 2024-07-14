@@ -2,7 +2,8 @@ name: Build and Deploy Mule application
 on:
   push:
     branches:
-      - main
+      - test
+      # - main
 jobs:
   Build:
     runs-on: ubuntu-latest
