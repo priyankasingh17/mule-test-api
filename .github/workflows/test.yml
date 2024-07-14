@@ -54,7 +54,7 @@ jobs:
       CA_CLIENT_SECRET: ${{secrets.CONNECTED_APP_CLIENT_SECRET}}
       # ID: ${{ secrets.CONNECTED_APP_CLIENT_ID }}
       # SECRET: ${{ secrets.CONNECTED_APP_CLIENT_SECRET }}
-      ENV_NAME: dev
+      ENV_NAME: Sandbox
     steps:
       - name: Print client ID
         run: echo "CA_CLIENT_ID is $CA_CLIENT_ID and CA_CLIENT_SECRET is $CA_CLIENT_SECRET"
@@ -78,4 +78,4 @@ jobs:
           -Danypoint.CA_CLIENT_ID="$CA_CLIENT_ID" \
           -Danypoint.CA_CLIENT_SECRET="$CA_CLIENT_SECRET" \
           -Denv="$ENV_NAME" \
-          # -DskipDeploymentVerification="true"
+        # -DskipDeploymentVerification="true"
