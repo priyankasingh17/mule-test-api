@@ -78,7 +78,7 @@ jobs:
         ID: ${{ secrets.CONNECTED_APP_CLIENT_ID }}
         SECRET: ${{ secrets.CONNECTED_APP_CLIENT_SECRET }}
         # KEY: ${{ secrets.decryption_key }}
-        ENV_NAME: dev
+        # ENV_NAME: dev
     steps:    
     - name: Checkout this repo
       uses: actions/checkout@v3
