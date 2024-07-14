@@ -1,4 +1,4 @@
-name: Build and Deploy to CloudHub 
+name: Build and Deploy to CloudHub
 
 on:
   push:
