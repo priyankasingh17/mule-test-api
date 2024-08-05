@@ -12,7 +12,7 @@ on:
 jobs:
   call-workflow:
     # Importing a reusable workflow from another repository and branch
-    uses: https://github.com/priyankasingh17/mule-reusable-workflow/blob/main/.github/workflows/test.yml@main
+    uses: priyankasingh17/mule-reusable-workflow/.github/workflows/test.yml@main
     # Passing 'node-version' as an input parameter to the reusable workflow
     # with:
     #   node-version: '18.x'
