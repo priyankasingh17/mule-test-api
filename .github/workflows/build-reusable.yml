@@ -3,10 +3,10 @@ name: Build and Deploy to CloudHub
 on:
   push:
     branches: 
-      - main
+      - test
   pull_request:
     branches:
-      - main
+      - test
   workflow_dispatch:
     
 jobs:
