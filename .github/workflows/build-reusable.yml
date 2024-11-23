@@ -20,7 +20,13 @@ jobs:
         
   call-workflow:
     # Importing a reusable workflow from another repository and branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: set ur
+        id: workflow_url
+        run: echo url=priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-${GITHUB_REF##*/}.yml@maim
     # uses: priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-${GITHUB_REF##*/}.yml@maim
-    uses: priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-main.yml@main
+      - name: call flow
+        uses: ${{steps.workflow_url.outputs.url}}
     # with:
     # 
