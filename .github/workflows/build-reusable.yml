@@ -8,11 +8,16 @@ on:
   workflow_dispatch:
     
 jobs:
-  call-main-workflow:
-    # if: github.ref == 'refs/heads/main'      
-    uses: priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy.yml@main
-    with:
-      refs: ${GITHUB_REF##*/}
+  call-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      # if: github.ref == 'refs/heads/main'  
+      - name: call workflow
+        uses: priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy.yml@main
+        with:
+          refs: ${GITHUB_REF##*/}
     
   # call-dev-workflow:
     # if: github.ref == 'refs/heads/dev'      
