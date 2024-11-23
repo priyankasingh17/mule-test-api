@@ -1,0 +1,11 @@
+name: Build and Deploy to CloudHub 
+
+on:
+  push:
+    branches: 
+      - main
+  workflow_dispatch:
+    
+jobs:
+  call-workflow:
+    uses: priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-main.yml@main
