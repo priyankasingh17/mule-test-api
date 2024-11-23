@@ -16,7 +16,7 @@ jobs:
 
       - name: Set output
         id: branchName
-        run: echo "name=${GITHUB_REF##*/}"
+        run: echo "name=${GITHUB_REF##*/}" 
         
   call-workflow:
     # Importing a reusable workflow from another repository and branch
