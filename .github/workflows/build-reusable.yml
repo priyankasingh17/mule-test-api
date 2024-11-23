@@ -20,6 +20,7 @@ jobs:
         
   call-workflow:
     # Importing a reusable workflow from another repository and branch
-    uses: priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-${GITHUB_REF##*/}.yml@maim
+    # uses: priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-${GITHUB_REF##*/}.yml@maim
+    uses: priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-main.yml@main
     # with:
     # 
