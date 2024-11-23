@@ -10,7 +10,7 @@ on:
 jobs:
   call-main-workflow:
     # if: github.ref == 'refs/heads/main'      
-    uses: priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-main.yml@main
+    uses: priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy.yml@main
     with:
       refs: github.ref
     
