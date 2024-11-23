@@ -15,7 +15,7 @@ jobs:
 
       - name: Set output
         id: branchName
-        run: echo "name=${{GITHUB_REF##*/}}"
+        run: echo "name= ${GITHUB_REF##*/}"
         
       - name: Check output
         run: echo "outputs=${{ steps.branchName.outputs }}"
