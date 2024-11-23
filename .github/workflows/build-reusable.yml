@@ -15,7 +15,12 @@ jobs:
 
       - name: Set output
         id: branchName
-        run: echo "name= ${GITHUB_REF##*/}"
+        run: echo "name=${GITHUB_REF##*/}"
+      - name: Set url
+        run: echo priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-'${GITHUB_REF##*/}'.yml@main
         
-      - name: Check output
-        run: echo "outputs=${{ steps.branchName.outputs }}"
+  # call-workflow:
+  #   # Importing a reusable workflow from another repository and branch
+  #   uses: priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-'${GITHUB_REF##*/}'.yml@main
+  #   # with:
+  #   # 
