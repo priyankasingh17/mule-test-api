@@ -4,111 +4,18 @@ on:
   push:
     branches: 
       - test
-  pull_request:
-    branches:
-      - test
   workflow_dispatch:
     
 jobs:
-  call-workflow:
-    # Importing a reusable workflow from another repository and branch
-    uses: priyankasingh17/mule-reusable-workflow/.github/workflows/test.yml@main
-    # Passing 'node-version' as an input parameter to the reusable workflow
-    # with:
-    #   node-version: '18.x'
-    
-  # test:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - name: Checkout this repo
-  #     uses: actions/checkout@v3
-  #   - name: Cache dependencies
-  #     uses: actions/cache@v3
-  #     with:
-  #       path: ~/.m2/repository
-  #       key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-  #       restore-keys: |
-  #         ${{ runner.os }}-maven-
-  #   - name: Set up JDK 1.8
-  #     uses: actions/setup-java@v3
-  #     with:
-  #       distribution: 'zulu'
-  #       java-version: 8
-  #   - name: Test with Maven
-  #     env:
-  #       nexus_username: ${{ secrets.nexus_username }}
-  #       nexus_password: ${{ secrets.nexus_password }}
-  #       KEY: ${{ secrets.decryption_key }}
-  #     run: mvn test --settings .maven/settings.xml -Dsecure.key="$KEY"
-  #   - name: Upload MUnit reports
-  #     uses: actions/upload-artifact@v3
-  #     with:
-  #       name: munit-test-reports
-  #       path: target/site/munit/coverage/
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v3
 
-#   build:
-#     # needs: test
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: Checkout Repository
-#       uses: actions/checkout@v3
-#     - name: Cache dependencies
-#       uses: actions/cache@v3
-#       with:
-#         path: ~/.m2/repository
-#         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-#         restore-keys: |
-#           ${{ runner.os }}-maven-
-#     - name: Set up JDK 1.8
-#       uses: actions/setup-java@v4.2.1
-#       with:
-#         distribution: 'zulu'
-#         java-version: 8
-#         cache: maven
-#     - name: Build with Maven
-#       run: mvn -B package --file pom.xml -DskipMunitTests
-#     - name: Stamp artifact file name with commit hash
-#       run: |
-#         artifactName1=$(ls target/*.jar | head -1)
-#         commitHash=$(git rev-parse --short "$GITHUB_SHA")
-#         artifactName2=$(ls target/*.jar | head -1 | sed "s/.jar/-$commitHash.jar/g")
-#         mv $artifactName1 $artifactName2
-#     - name: Upload artifact 
-#       uses: actions/upload-artifact@v3
-#       with:
-#           name: artifacts
-#           path: target/*.jar
+      - name: Set output
+        id: branchName
+        run: echo "name=${GITHUB_REF##*/}"
         
-#   deploy:
-#     needs: build
-#     runs-on: ubuntu-latest
-#     env:
-#         ID: ${{ secrets.CONNECTED_APP_CLIENT_ID }}
-#         SECRET: ${{ secrets.CONNECTED_APP_CLIENT_SECRET }}
-#         # KEY: ${{ secrets.decryption_key }}
-#         # ENV_NAME: dev
-#     steps:    
-#     - name: Checkout this repo
-#       uses: actions/checkout@v3
-#     - name: Cache dependencies
-#       uses: actions/cache@v3
-#       with:
-#         path: ~/.m2/repository
-#         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-#         restore-keys: |
-#           ${{ runner.os }}-maven-
-#     - uses: actions/download-artifact@v3
-#       with:
-#         name: artifacts
-#     - name: Deploy to CloudHub
-#       run: |
-#         artifactName=$(ls *.jar | head -1)
-#         mvn deploy -DskipMunitTests -DmuleDeploy -e \
-#          -Dmule.artifact=$artifactName \
-#          -Dclient.id="$ID" \
-#          -Dclient.secret="$SECRET" 
-#       # -Denv="$ENV_NAME" \
-# #  -Danypoint.muleVersion=4.5.4 \
-#  # -Ddecryption.key="$KEY"
-#       # -Danypoint.env=Sandbox \
-#       #    
+      - name: Check output
+        run: echo ${{ steps.branchName.outputs.name }}
