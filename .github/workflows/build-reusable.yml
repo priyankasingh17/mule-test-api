@@ -8,31 +8,12 @@ on:
   workflow_dispatch:
     
 jobs:
-  # test:
-    # runs-on: ubuntu-latest
-    # steps:
-    #   - name: Checkout this repo
-    #     uses: actions/checkout@v3
-
-    #   - name: Set output
-    #     id: branchName
-    #     run: echo "name=${GITHUB_REF##*/}" 
-        
-  # call-workflow:
-    # Importing a reusable workflow from another repository and branch
-    # runs-on: ubuntu-latest
-    # steps:
-    #   - name: set ur
-    #     id: workflow_url
-    #     run: echo url=priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-${GITHUB_REF##*/}.yml@main
-    # uses: priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-${GITHUB_REF##*/}.yml@main
-      # - name: call flow
-      #   uses: ${{steps.workflow_url.outputs.url}}
-    # with:
-    # 
-
-  call-workflow:
+  call-main-workflow:
     if: github.ref == 'refs/heads/main'      
     uses: priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-main.yml@main
+    
+  call-dev-workflow:
+    if: github.ref == 'refs/heads/dev'      
+    uses: priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-dev.yml@main
      
 
