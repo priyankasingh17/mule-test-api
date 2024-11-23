@@ -8,15 +8,15 @@ on:
   workflow_dispatch:
     
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout this repo
-        uses: actions/checkout@v3
+  # test:
+    # runs-on: ubuntu-latest
+    # steps:
+    #   - name: Checkout this repo
+    #     uses: actions/checkout@v3
 
-      - name: Set output
-        id: branchName
-        run: echo "name=${GITHUB_REF##*/}" 
+    #   - name: Set output
+    #     id: branchName
+    #     run: echo "name=${GITHUB_REF##*/}" 
         
   call-workflow:
     # Importing a reusable workflow from another repository and branch
