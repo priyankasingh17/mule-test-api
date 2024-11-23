@@ -31,8 +31,8 @@ jobs:
     # with:
     # 
 
-  call-workflow1:
-    if: ${GITHUB_REF##*/} == 'main'      
+  call-workflow:
+    if: github.ref == 'refs/heads/main'      
     uses: priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-main.yml@main
      
 
