@@ -17,7 +17,7 @@ jobs:
         id: branchName
         run: echo "name=${GITHUB_REF##*/}"
       - name: Set url
-        run: echo priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-'${GITHUB_REF##*/}'.yml@main
+        run: echo priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy-${GITHUB_REF##*/}.yml@main
         
   # call-workflow:
   #   # Importing a reusable workflow from another repository and branch
