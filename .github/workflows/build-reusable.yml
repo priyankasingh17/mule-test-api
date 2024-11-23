@@ -12,7 +12,7 @@ jobs:
     # if: github.ref == 'refs/heads/main'      
     uses: priyankasingh17/mule-reusable-workflow/.github/workflows/build-and-deploy.yml@main
     with:
-      refs: github.ref
+      refs: ${GITHUB_REF##*/}
     
   # call-dev-workflow:
     # if: github.ref == 'refs/heads/dev'      
